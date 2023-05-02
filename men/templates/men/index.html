@@ -1,0 +1,22 @@
+{% extends 'men/base.html' %}
+
+{% block content %}
+<ul class="list-articles">
+	{% for p in posts %}
+			<li><div class="article-panel">
+	<p class="first">Категория: {{p.cat}}</p>
+	<p class="last">Дата: {{p.pub_date|date:"d-m-Y H:i:s"}}</p>
+</div>
+    <br>
+        <p>User: {{p.user}}</p>
+    <br>
+	{% autoescape on %}
+        <p>{{p.question_text|linebreaks}}</p>
+	{% endautoescape %}
+			<div class="clear"></div>
+            <p class="link-read-post"><a href="{% url 'write_answer' p.pk %}">Відповісти</a></p>
+			<p class="link-read-post"><a href="{% url 'read_answer' p.pk %}">Читати відповіді</a></p>
+			</li>
+	{% endfor %}
+</ul>
+{% endblock %}
